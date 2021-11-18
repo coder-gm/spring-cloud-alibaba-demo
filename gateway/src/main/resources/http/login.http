@@ -1,0 +1,8 @@
+###登录###
+POST 127.0.0.1:8082/gateway/authority/login
+Content-Type: application/json
+
+{
+  "username": "zhangguangming",
+  "password": "Gm859230"
+}

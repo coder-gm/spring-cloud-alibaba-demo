@@ -1,0 +1,67 @@
+server:
+  #访问HTTP端口号
+  port: 8081
+  servlet:
+    context-path: "/gateway"
+
+
+########################################################
+### 指定日志文件
+########################################################
+logging:
+  config: classpath:log4j2.xml
+
+
+
+#########################################################
+#### Spring配置
+#########################################################
+spring:
+
+  ################################################## Spring Cloud Alibaba 配置 ##########################################
+  cloud:
+    nacos:
+      discovery:
+        enabled: true #如果不想使用Nacos进行服务注册与发现,设置为false即可
+        server-addr: 139.196.155.56:8848,139.196.155.56:8858 #服务注册地址
+        namespace: 53dc28d0-21c8-46fd-be52-b206940b7f0d #命名空间ID
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+
+  application:
+    name: gateway #服务名
+
+  thymeleaf:
+    check-template: false
+    check-template-location: false
+  main:
+    allow-bean-definition-overriding: true #因为将来会引入很多依赖,难免会重名的bean
+
+
+
+#########################################################
+#### Nacos 网关路由配置
+#########################################################
+
+#这个地方独立配置,是网关的数据,代码GatewayConfig.java 中读取监听
+nacos:
+  gateway:
+    route:
+      config:
+        data-id: gateway-router
+        group: gateway-router-group
+
+
+#########################################################
+#### Spring Boot Actuator 配置
+#########################################################
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  #需要开放的端点,默认只打开health 和 info 两个端点.通过设置 * ,可以开放所有端点
+  endpoint:
+    health:
+      show-details: always #健康检查是否显示详细信息

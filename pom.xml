@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+
+    <groupId>cn.com.springcloud.alibaba.test</groupId>
+    <artifactId>spring-cloud-alibaba-test</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging><!-- 打包方式-->
+    <name>spring-cloud-alibaba-test</name>
+    <description>SpringCloud学习测试</description>
+    <inceptionYear>2021</inceptionYear>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <!-- 声明子模块 -->
+    <modules>
+        <!--公共工具模块-->
+        <module>common</module>
+
+        <!--微服务指标监控-->
+        <module>actuator-admin</module>
+
+        <!--网关-->
+        <module>gateway</module>
+
+        <!--微服务1-->
+        <module>micro-service-1</module>
+
+        <!--微服务2-->
+        <module>micro-service-2</module>
+
+        <!--鉴权中心-->
+        <module>authority-center</module>
+
+        <!--Hystrix 的使用情况进行实时监控-->
+        <module>hystrix-dashborad</module>
+    </modules>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+
+                <!-- 编译源文件和测试源文件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+                <!-- 执行测试文件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                    <configuration>
+                        <skipTests>true</skipTests>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
